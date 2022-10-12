@@ -1,6 +1,6 @@
 ---
 title: "Mini Data-Analysis Deliverable 1"
-output: github_document
+output: html_document
 ---
 
 # Welcome to your (maybe) first-ever data analysis project!
@@ -80,10 +80,10 @@ And that is exactly the first thing that you will do!
 
 <!-------------------------- Start your work below ---------------------------->
 
-**1: building_permits**
-**2: cancer_sample**
-**3: flow_sample**
-**4: steam_games**
+1: building_permits
+2: cancer_sample
+3: flow_sample
+4: steam_games
 
 <!----------------------------------------------------------------------------->
 
@@ -96,32 +96,32 @@ And that is exactly the first thing that you will do!
 ```{r}
 ### EXPLORE HERE ###
 # steam_games
-steam_games
-head(steam_games)
-dim(steam_games)
-class(steam_games)
-glimpse(steam_games)
+# steam_games
+# head(steam_games)
+# dim(steam_games)
+# class(steam_games)
+# glimpse(steam_games)
 
 # cancer_sample
-cancer_sample
-head(cancer_sample)
-dim(cancer_sample)
-class(cancer_sample)
-glimpse(cancer_sample)
+# cancer_sample
+# head(cancer_sample)
+# dim(cancer_sample)
+# class(cancer_sample)
+# glimpse(cancer_sample)
 
 # flow_sample
-flow_sample
-head(flow_sample)
-dim(flow_sample)
-class(flow_sample)
-glimpse(flow_sample)
+# flow_sample
+# head(flow_sample)
+# dim(flow_sample)
+# class(flow_sample)
+# glimpse(flow_sample)
 
 # building_permits
-building_permits
-head(building_permits)
-dim(building_permits)
-class(building_permits)
-glimpse(building_permits)
+# building_permits
+# head(building_permits)
+# dim(building_permits)
+# class(building_permits)
+# glimpse(building_permits)
 
 ```
 
@@ -130,8 +130,8 @@ glimpse(building_permits)
 1.3 Now that you've explored the 4 datasets that you were initially most interested in, let's narrow it down to 2. What lead you to choose these 2? Briefly explain your choices below, and feel free to include any code in your explanation.
 
 <!-------------------------- Start your work below ---------------------------->
-**1: flow_sample**
-**2: steam_games**
+1: flow_sample
+2: steam_games
 
 Explanation:
 Compared with the rest of the datasets, these two datasets seem to be interesting.
@@ -142,7 +142,7 @@ the features easy to understand and to analyze trends compared with `cancer_samp
 1.4 Time for the final decision! Going back to the beginning, it's important to have an *end goal* in mind. For example, if I had chosen the `titanic` dataset for my project, I might've wanted to explore the relationship between survival and other variables. Try to think of 1 research question that you would want to answer with each dataset. Note them down below, and make your final choice based on what seems more interesting to you!
 
 <!-------------------------- Start your work below ---------------------------->
-Research Question: My final decision is to choose **steam_games** dataset. I am interested in exploring the relationship and patterns between the price of the game and other features such as genre, publisher, reviews, etc.
+Research Question: My final decision is to choose `steam_games` dataset. I am interested in exploring the relationship and patterns between the price of the game and other features such as genre, publisher, reviews, etc.
 <!----------------------------------------------------------------------------->
 
 # Important note
@@ -169,46 +169,7 @@ If we rewind and go back to the learning objectives, you'll see that by the end 
 2.2 For each of the 4 exercises that you complete, provide a *brief explanation* of why you chose that exercise in relation to your data (in other words, why does it make sense to do that?), and sufficient comments for a reader to understand your reasoning and code.
 
 <!-------------------------- Start your work below ---------------------------->
-```{r}
-# 1.  Plot the distribution of a numeric variable.
-original_price_distribution <- ggplot(steam_games, aes(original_price, ..density..)) +
-                                    geom_histogram() +
-                                    xlim(0, 50) # plot the distribution of the original price of the game and set the limit of x-axis to range between 0 to 50
-print(original_price_distribution)
 
-# Conclusion: most of the games in Steam are free or below 50 dollars
-```
-
-
-```{r}
-# 2.  Create a new variable based on other variables in your data (only if it makes sense)
-glimpse(steam_games) # take a look at the dataset
-steam_games_prices <- select(steam_games, name, original_price, discount_price) # select columns containing prices
-print(steam_games_prices) # take a look of the subset
-steam_games_discount_rate <- steam_games_prices %>%
-                                mutate(discount_rate = (original_price - discount_price) / original_price) # calculate the discount rate based on the price difference
-print(steam_games_discount_rate) # print out the result containing the new column
-```
-
-
-```{r}
-# 3.  Investigate how many missing values there are per variable. Can you find a way to plot this?
-steam_games %>%
-    summarise_all(list(~is.na(.))) %>% # convert this data frame to a boolean data frame
-    pivot_longer(everything(), names_to = "variables", values_to="missing") %>% #
-    count(variables, missing) %>% # compute missing and non-missing values for each column
-    ggplot(aes(y=variables,x=n,fill=missing)) +
-    geom_col(position = "fill") # plot
-```
-
-
-```{r}
-# 5.  Filter observations in your data according to your own criteria. Think of what you'd like to explore - again, if this was the `titanic` dataset, I may want to narrow my search down to passengers born in a particular year...
-game_languages <- steam_games %>%
-                    select(name, languages) %>%
-                    filter(grepl("Chinese", languages))
-print(game_languages) # I am selecting all the games that support my home language (in my case: Chinese) to analyze and I observed that 9359 out of 40833 games in this dataset supports Chinese as one of the game languages.
-```
 <!----------------------------------------------------------------------------->
 
 # Task 3: Write your research questions (5 points)
@@ -216,16 +177,7 @@ print(game_languages) # I am selecting all the games that support my home langua
 So far, you have chosen a dataset and gotten familiar with it through exploring the data. Now it's time to figure out 4 research questions that you would like to answer with your data! Write the 4 questions and any additional comments at the end of this deliverable. These questions are not necessarily set in stone - TAs will review them and give you feedback; therefore, you may choose to pursue them as they are for the rest of the project, or make modifications!
 
 <!--- *****START HERE***** --->
-Data set:*steam_games*
 
--   Research question 1: Analyze the trend of the number of games published in each year, is it increasing or decreasing?
-
--   Research question 2: What's the average price of games published in each year?
-
--   Research question 3: Is there any relationship between the game genre and the price of the game?
-
--   Research question 4: Is there any relationship between the reviews and the price of the game?
-<!----------------------------------------------------------------------------->
 # Task 4: Process and summarize your data (13 points)
 
 From Task 2, you should have an idea of the basic structure of your dataset (e.g. number of rows and columns, class types, etc.). Here, we will start investigating your data more in-depth using various data manipulation functions.
@@ -253,87 +205,6 @@ Ensure that the output of each operation is printed!
 Make sure it's clear what research question you are doing each operation for!
 
 <!------------------------- Start your work below ----------------------------->
-*Research question 1:* Analyze the trend of the number of games published in each year, is it increasing or decreasing?
-**Summarizing:**  Create a categorical variable with 3 or more groups from an existing numerical variable. You can use this new variable in the other tasks!
-
-```{r}
-steam_games$year <- as.integer(sub('.*,\\s*', '', steam_games$release_date))
-games_per_year <- as_tibble(count(steam_games, year))
-print(games_per_year)
-```
-
-**Graphing:**  Create a graph out of summarized variables that has at least two geom layers.
-
-```{r}
-ggplot(games_per_year) +
-    geom_bar(aes(year, weight = n)) +
-    xlim(1981, 2025) +
-    xlab("Year") +
-    ylab("Number of Games Published")
-```
-
-*Research question 2:* What's the average price of games published in each year?
-**Summarizing:**  Create a categorical variable with 3 or more groups from an existing numerical variable. You can use this new variable in the other tasks!
-
-```{r}
-average_price_each_year <- steam_games %>%
-                                group_by(year) %>%
-                                summarise(original_price_mean = mean(original_price, na.rm = TRUE))
-print(average_price_each_year)
-```
-
-**Graphing:**  Create a graph out of summarized variables that has at least two geom layers.
-
-```{r}
-ggplot(average_price_each_year) +
-    geom_bar(aes(year, weight = original_price_mean)) +
-    xlim(1981, 2025) +
-    xlab("Year") +
-    ylab("Average Price Per Game")
-```
-
-*Research question 3:* Is there any relationship between the game genre and the price of the game?
-**Summarizing:**  Create a categorical variable with 3 or more groups from an existing numerical variable. You can use this new variable in the other tasks!
-
-```{r}
-games_with_first_genre <- steam_games %>%
-                            mutate(first_genre = gsub(",.*$", "", genre)) %>%
-                            select(name, first_genre, year, original_price)
-games_subset <- filter(games_with_first_genre, first_genre %in% c("Action", "Adventure", "Racing", "RPG"))
-print(games_subset)
-```
-
-**Graphing:**  Make a graph where it makes sense to customize the alpha transparency.
-
-```{r}
-ggplot(games_subset, aes(x = year, y = original_price)) +
-                 geom_point(aes(color = first_genre),
-                                        size = 2,
-                                        alpha = 1) +
-                    xlim(1981, 2025) +
-                    ylim(0, 50)
-```
-
-*Research question 4:* Is there any relationship between the reviews and the price of the game?
-**Summarizing:**  Create a categorical variable with 3 or more groups from an existing numerical variable. You can use this new variable in the other tasks!
-
-```{r}
-level_of_review <- steam_games %>%
-                        mutate(review_level = gsub(",.*$", "", all_reviews)) %>%
-                        select(name, review_level, original_price)
-print(level_of_review)
-```
-
-**Graphing:**  Create a graph out of summarized variables that has at least two geom layers.
-
-```{r}
-level_of_review %>%
-  group_by(review_level) %>%
-  summarise(original_price_mean = mean(original_price, na.rm = TRUE))
-ggplot(level_of_review, aes(x = original_price)) + 
-    geom_density(aes(group=review_level, color=review_level)) +
-    xlim(0, 50)
-```
 
 <!----------------------------------------------------------------------------->
 
@@ -342,14 +213,7 @@ ggplot(level_of_review, aes(x = original_price)) +
 Based on the operations that you've completed, how much closer are you to answering your research questions? Think about what aspects of your research questions remain unclear. Can your research questions be refined, now that you've investigated your data a bit more? Which research questions are yielding interesting results?
 
 <!-------------------------- Start your work below ---------------------------->
-**Research question 1**: Analyze the trend of the number of games published in each year, is it increasing or decreasing?
-**-   Comment**: It seems like in recent years before covid-19, the number of games published in each year is increasing. However, covid-19 affected the number of games published but we could predict that it will keep recovering and increase gradually in the following years.
-**Research question 2**: What's the average price of games published in each year?
-**-   Comment**: This question could be answered clearly by observing the bar plot with highest height, and this appears in year of 2019.
-**Research question 3**: Is there any relationship between the game genre and the price of the game?
-**-   Comment**: Unfortunately, our analysis cannot conclude any useful pattern based on the graph we generated, however, we could say each genre has a similar distribution in which there is few games that has high prices (around 50 dollars) while the majority is not expensive (around 10-20 dollars).
-**Research question 4**: Is there any relationship between the reviews and the price of the game?
-**-   Comment**: Unfortunately the plot we generated does not give us any useful pattern so we could not answer this question with certainty at this point. Some obvious observations may include that the majority of games that received a overwhelming negative reviews are not expensive in general (around 10-20 dollars).
+
 <!----------------------------------------------------------------------------->
 
 ### Attribution
