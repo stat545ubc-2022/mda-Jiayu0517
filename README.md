@@ -2,6 +2,6 @@
 
 In the main directory, there is 
 - a folder containing relevant codes for **milestone 1** and
-- a folder containing relevant codes for **milestone 1** and
+- a folder containing relevant codes for **milestone 2** and
 - the **output** folder containing csv files and other data records and
 - this **README** file
